@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: my-go-server
+spec:
+ replicas: 3
+ template:
+   metadata:
+     name: my-go-server
+     labels:
+       run: ethersaif
+   spec:
+     containers:
+       - name: myimage
+         image: "registry.ng.bluemix.net/ethersaif/myimage"
+         imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+ name: my-service
+ labels:
+   run: ethersaif
+spec:
+ type: NodePort
+ selector:
+   run: ethersaif
+ ports:
+  - protocol: TCP
+    port: 8545
+    nodePort: 30080
