@@ -1,31 +1,31 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
- name: my-go-server
+ name: blockchain-server-test # give any name 
 spec:
  replicas: 3
  template:
    metadata:
-     name: my-go-server
+     name: blockchain-server-test
      labels:
-       run: ethersaif
+       run: etherprivate
    spec:
      containers:
-       - name: myimage
-         image: "registry.ng.bluemix.net/ethersaif/myimage"
+       - name: ether
+         image: "registry.ng.bluemix.net/etherprivate/myimage" # your registery name 
          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
- name: my-service
+ name: my-service-test-11 # give a service name
  labels:
-   run: ethersaif
+   run: etherprivate
 spec:
  type: NodePort
  selector:
-   run: ethersaif
+   run: etherprivate
  ports:
   - protocol: TCP
-    port: 8545
-    nodePort: 30080
+    port: 8545 # it shall be 8545 and no other port !!!!!
+    nodePort: 30090 # Give a port to access the application publically 
